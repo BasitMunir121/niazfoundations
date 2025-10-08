@@ -33,7 +33,14 @@ jobs:
       run: npm ci
 
     - name: Build Angular application
-      run: npm run build -- --configuration production --base-href "/niazfoundations/"
+      run: npx ng build --configuration=production --base-href="/niazfoundations/"
+
+    - name: List build output (debug)
+      run: |
+        echo "Contents of dist directory:"
+        ls -la dist/
+        echo "Contents of dist/niaz-foundations-website:"
+        ls -la dist/niaz-foundations-website/
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -41,7 +48,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './dist/niaz-foundations-website'
+        path: './dist/niaz-foundations-website/browser'
 
     - name: Deploy to GitHub Pages
       id: deployment
